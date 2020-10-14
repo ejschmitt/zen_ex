@@ -145,12 +145,15 @@ defmodule ZenEx.Model.Ticket do
   """
   @spec search(map()) :: %ZenEx.Collection{} | {:error, String.t()}
   def search(opts) when is_map(opts) do
-    search(SearchQuery.build(opts))
+    opts
+    |> SearchQuery.build()
+    |> search()
   end
 
   @spec search(String.t()) :: %ZenEx.Collection{} | {:error, String.t()}
   def search(query) do
-    "/api/v2/users/search.json?query=type:ticket #{query}"
+    "/api/v2/search.json?query=type:ticket #{query}"
+    |> URI.encode()
     |> HTTPClient.get(results: [Ticket])
   end
 
