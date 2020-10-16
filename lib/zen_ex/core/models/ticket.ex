@@ -147,6 +147,7 @@ defmodule ZenEx.Model.Ticket do
   def search(opts) when is_map(opts) do
     opts
     |> SearchQuery.build()
+    |> IO.inspect()
     |> search()
   end
 

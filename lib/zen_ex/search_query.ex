@@ -20,7 +20,8 @@ defmodule ZenEx.SearchQuery do
       |> Enum.map(fn {k,v} ->
         case v do
           nil                         -> nil
-          values when is_list(values) -> "#{Atom.to_string(k)}:#{Enum.join(values, ",")}"
+          #values when is_list(values) -> "#{Atom.to_string(k)}:#{Enum.join(values, ",")}"
+          values when is_list(values) -> Enum.map(values, fn(v) -> "#{Atom.to_string(k)}:#{v}" end) |> Enum.join(" ")
           _                           -> "#{Atom.to_string(k)}:#{v}"
         end
       end)
