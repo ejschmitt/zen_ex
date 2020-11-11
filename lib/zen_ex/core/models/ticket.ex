@@ -163,5 +163,5 @@ defmodule ZenEx.Model.Ticket do
   def _desc_to_comment(tickets) when is_list(tickets), do: Enum.map(tickets, &_desc_to_comment(&1))
 
   @spec _desc_to_comment(%Ticket{}) :: %Ticket{}
-  def _desc_to_comment(%Ticket{comment: comment, description: description} = ticket), do: Map.merge(ticket, (comment || %{comment: %{body: ticket.description}}))
+  def _desc_to_comment(%Ticket{comment: comment, description: description} = ticket), do: Map.merge(ticket, comment || %{comment: %{body: ticket.description}})
 end
